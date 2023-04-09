@@ -186,7 +186,11 @@ public class MainView {
     }
 
     @FXML
-    void btnMoveOnAction(ActionEvent event) {}
+    void btnMoveOnAction(ActionEvent event) {
+        source.renameTo(new File(target, source.getName()));
+        new Alert(Alert.AlertType.INFORMATION, String.format(" '%s' is moved to '%s' successfully", source.getName(), target.getName())).show();
+        clearSelection();
+    }
 
     private void setProgressBar(long current,long target) {
 
