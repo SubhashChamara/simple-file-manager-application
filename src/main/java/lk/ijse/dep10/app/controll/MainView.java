@@ -157,9 +157,33 @@ public class MainView {
     }
 
     @FXML
-    void btnDeleteOnAction(ActionEvent event) {}
+    void btnDeleteOnAction(ActionEvent event) {
+        System.out.println(source);
+        if (!source.exists()) return;
+        if (source.isFile()) {
+            source.delete();
+            new Alert(Alert.AlertType.INFORMATION, String.format("'%s' file is deleted", source.getName())).show();
+            clearSelection();
+            return;
+        }
+        folderDelete(source);
+        new Alert(Alert.AlertType.INFORMATION, String.format("'%s' file is deleted", source.getName())).show();
+        clearSelection();
+        System.out.println("deletedFolder");
+    }
 
-    private void folderDelete(File source) {}
+    private void folderDelete(File source) {
+        File[] files = source.listFiles();
+        for (File selectFile : files) {
+            if (selectFile.isFile()) {
+                selectFile.delete();
+                continue;
+            }
+            folderDelete(selectFile);
+        }
+        source.delete();
+        System.out.println("deleted");
+    }
 
     @FXML
     void btnMoveOnAction(ActionEvent event) {}
