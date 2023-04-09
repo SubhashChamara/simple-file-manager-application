@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane prefHeight="250.0" prefWidth="375.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.dep10.app.controll.MainView">
+    <children>
+        <HBox layoutX="21.0" layoutY="44.0" maxWidth="1.7976931348623157E308" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+            <children>
+                <TextField fx:id="txtSource" disable="true" editable="false" maxWidth="1.7976931348623157E308" prefHeight="24.0" prefWidth="216.0" promptText="No selected file/folder " HBox.hgrow="ALWAYS" />
+                <Button fx:id="btnBrowsSource" mnemonicParsing="false" onAction="#btnBrowsSourceOnAction" prefHeight="24.0" prefWidth="87.0" style="-fx-background-color: green;" text="BROWS" textFill="#f2e9e9" />
+            </children>
+        </HBox>
+        <Label layoutX="21.0" layoutY="28.0" text="Select a File / Folder" />
+        <HBox layoutX="21.0" layoutY="100.0" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+            <children>
+                <TextField fx:id="txtTargets" disable="true" editable="false" maxWidth="1.7976931348623157E308" prefHeight="24.0" prefWidth="216.0" promptText="No selected folder " HBox.hgrow="ALWAYS" />
+                <Button fx:id="btnBrowsTarget" disable="true" mnemonicParsing="false" onAction="#btnBrowsTargetOnAction" prefHeight="24.0" prefWidth="87.0" style="-fx-background-color: green;" text="BROWS" textFill="#e8dbdb" />
+            </children>
+        </HBox>
+        <Label layoutX="21.0" layoutY="84.0" text="Select target folder" />
+        <HBox alignment="CENTER" layoutX="20.0" layoutY="144.0" maxWidth="1.7976931348623157E308" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+            <children>
+                <Button fx:id="btnCopy" disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnCopyOnAction" prefHeight="24.0" prefWidth="87.0" style="-fx-background-color: blue;" text="COPY" textFill="#fffef0" HBox.hgrow="ALWAYS" />
+                <Button fx:id="btnMove" disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnMoveOnAction" prefHeight="24.0" prefWidth="87.0" style="-fx-background-color: orange;" text="MOVE" textFill="#141414" HBox.hgrow="ALWAYS" />
+                <Button fx:id="btnDelete" disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="24.0" prefWidth="87.0" style="-fx-background-color: red;" text="DELETE" textFill="#f8e6e6" HBox.hgrow="ALWAYS" />
+            </children>
+        </HBox>
+        <ProgressBar fx:id="pgbr" layoutX="20.0" layoutY="195.0" maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="347.0" progress="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+      <Label fx:id="lblProgress" layoutX="170.0" layoutY="221.0" text="0 %" />
+    </children>
+</AnchorPane>
