@@ -70,9 +70,78 @@ public class MainView {
     }
 
     @FXML
-    void btnCopyOnAction(ActionEvent event) throws InterruptedException {}
+    void btnCopyOnAction(ActionEvent event) throws InterruptedException {
+        btnCopy.getScene().getWindow().setHeight(650);
+        if (new File(target, source.getName()).exists() && !source.getParentFile().equals(target)) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, String.format("%s file is already exist Do you want to replace", source.getName()), ButtonType.YES, ButtonType.NO);
+            Optional<ButtonType> confirm = alert.showAndWait();
+            if (confirm.isEmpty() || confirm.get() == ButtonType.NO) return;
+        }
 
-    private void fileWriter(File source, File target) {}
+        btnCopy.getScene().getWindow().setHeight(300);
+        if (source.isFile()) {
+            fileWriter(source, target);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, String.format("'%s' file is copied to '%s' ", source.getName(), target.getName()));
+            Optional<ButtonType> buttonType = alert.showAndWait();
+            Thread.sleep(300);
+            btnCopy.getScene().getWindow().setHeight(220);
+            clearSelection();
+            return;
+        }
+
+        folderWriter(source, target);
+        new Alert(Alert.AlertType.INFORMATION, String.format("'%s' file is copied to '%s' ", source.getName(), target.getName())).show();
+        Thread.sleep(300);
+        btnCopy.getScene().getWindow().setHeight(220);
+        clearSelection();
+    }
+    private void fileWriter(File source, File target) {
+        try {
+            FileInputStream fis = new FileInputStream(source);
+            File tempFile = new File(target, ".temp.txt");
+            FileOutputStream fos = new FileOutputStream(tempFile);
+            long size = source.length();
+            long progress=0;
+            while (true) {
+                progress+=1*1024;
+                byte[] buffer = new byte[1024 * 1];
+                int read = fis.read(buffer);
+                if (read == -1) break;
+                fos.write(buffer, 0, read);
+                setProgressBar(progress,size);
+            }
+
+            fis.close();
+            fos.close();;
+            if (source.getParentFile().equals(target)) {
+                int i = 1;
+                String k = String.valueOf(i);
+                String name = source.getName().substring(0, source.getName().lastIndexOf("."));
+                String format = source.getName().substring(source.getName().lastIndexOf("."));
+                while (true) {
+                    File fileNew = new File(target, name.concat(String.valueOf(i)).concat(format));
+                    if (!fileNew.exists()) {
+                        tempFile.renameTo(fileNew);
+                        return;
+                    }
+                    i++;
+                }
+            }
+            tempFile.renameTo(new File(target, source.getName()));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void clearSelection() {
+        txtSource.clear();
+        txtTargets.clear();
+        btnBrowsTarget.setDisable(true);
+        btnCopy.setDisable(true);
+        btnMove.setDisable(true);
+        btnDelete.setDisable(true);
+    }
 
     private void folderWriter(File source, File target) {}
 
@@ -84,6 +153,21 @@ public class MainView {
     @FXML
     void btnMoveOnAction(ActionEvent event) {}
 
+    private void setProgressBar(long current,long target) {
+
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                updateMessage((current/target*100) +"% Complete");
+                updateProgress(current/target*100,100);
+                return null;
+            }
+        };
+        new Thread(task).start();
+        pgbr.progressProperty().bind(task.progressProperty());
+        lblProgress.textProperty().bind(task.messageProperty());
+
+    }
 
 
 
