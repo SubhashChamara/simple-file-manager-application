@@ -143,7 +143,18 @@ public class MainView {
         btnDelete.setDisable(true);
     }
 
-    private void folderWriter(File source, File target) {}
+    private void folderWriter(File source, File target) {
+        new File(target, source.getName()).mkdirs();
+        File[] files = source.listFiles();
+        for (File selectFile : files) {
+            if (selectFile.isFile()) {
+                fileWriter(selectFile, (new File(target, source.getName())));
+                continue;
+            }
+            new File(target, selectFile.getName()).mkdirs();
+            folderWriter(selectFile, new File(target, source.getName()));
+        }
+    }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {}
