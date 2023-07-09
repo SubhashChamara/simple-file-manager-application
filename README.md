@@ -12,16 +12,26 @@ As I look forward to expanding the application, I aim to enhance my skills and k
  - JavaSE
 
 
+
+
+
 ### 2.How to try this project
   
   To try out the project, please follow these Git commands in your terminal:
   1. Clone the Project 
-     git clone https://github.com/SubhashChamara/simple-file-manager-system.git
-   
-  2. Build the project from parent folder
+   ```
+   git clone https://github.com/SubhashChamara/simple-file-manager-system.git
+   ```
+  3. Build the project from parent folder
     mvn clean install
   
-  Then execute the ApplicationWrapper class  
+  Then execute the ApplicationWrapper class 
+
+  
+  Project Demo 
+
+  
+https://github.com/SubhashChamara/simple-file-manager-system/assets/112160411/abf9b193-c361-47e2-b2ac-449885bc4373
   
 ### Contact
  
