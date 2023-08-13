@@ -45,4 +45,6 @@ https://github.com/SubhashChamara/simple-file-manager-system/assets/112160411/ab
 
 
 ### License
+This application is licensed under this [license](License.txt)
+
 Copyright &copy; 2023 | Subhash Chamara Udayanga | All Rights Reserved.
